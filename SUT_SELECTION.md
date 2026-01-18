@@ -1,9 +1,9 @@
-# SUT_SELECTION.md — Spring PetClinic Sample Application
+# SUT_SELECTION.md — REST version of Spring PetClinic Sample Application
 
 ## SUT elegido
-- Nombre: Spring PetClinic Sample Application
+- Nombre: Spring PetClinic Sample Application REST
 - Tipo: API REST (OpenAPI)
-- Fuente: https://github.com/spring-projects/spring-petclinic
+- Fuente: https://github.com/spring-petclinic/spring-petclinic-rest
 
 ## Motivo de selección
 - Es un SUT estándar, público y reproducible (ideal para comparar resultados entre equipos).
