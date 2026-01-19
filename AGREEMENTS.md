@@ -22,7 +22,7 @@ Esto incluye rutas GET, POST, PUT y DELETE según entidades.
 ## Directrices de Comunicación
 
 - Reuniones de coordinación: [Jueves 8:00 PM]
-- Retrospectivas semanales: [Domingo 7:00 PM]
+- Retrospectivas semanales:  [Domingo 7:00 PM]
 - Estándares de documentación: [Mediante Swagger documentando todas las operaciones REST, parametros en URL, Bodys de request, para se expuestos mediante OpenAPI]
 
 ## Estándares de Calidad
@@ -30,6 +30,7 @@ Esto incluye rutas GET, POST, PUT y DELETE según entidades.
 - Todo el código debe ser revisado por al menos un miembro del equipo
 - Las pruebas deben tener mínimo 80% de cobertura
 - La documentación debe actualizarse con cada cambio
+- Todas las funcionalidades de claculo numerico deberan tener testCAse unitarios que validen su correcto funcionamiento
 
 ## Fechas Límite y Hitos
 
