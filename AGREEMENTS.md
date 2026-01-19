@@ -27,7 +27,13 @@ Esto incluye rutas GET, POST, PUT y DELETE según entidades.
 
 ## Estándares de Calidad
 
-- Todo el código debe ser revisado por al menos un miembro del equipo
+- Se utilizará la ISO 25010 como linea base para determinar algunos aspectos   
+   Adecuación funcional     (la Api debe cumplir operaciones CRUD basicas )
+   Eficiencia en Desempeño  (Respuesta y uso de recursos)
+   Usabilidad               (Desde la perspectiva del desarrollador apoyado con SWAGGER)
+   Seguridad                (aspectos de seguridad autenticacion a las solicitudes) 
+   Mantenibilidad           (despliegue correcto en el contenedor)       
+   - Todo el código debe ser revisado por al menos un miembro del equipo
 - Las pruebas deben tener mínimo 80% de cobertura
 - La documentación debe actualizarse con cada cambio
 - Todas las funcionalidades de calculo numerico deberan tener testCAse unitarios que validen su correcto funcionamiento
