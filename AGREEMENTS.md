@@ -30,7 +30,7 @@ Esto incluye rutas GET, POST, PUT y DELETE según entidades.
 - Todo el código debe ser revisado por al menos un miembro del equipo
 - Las pruebas deben tener mínimo 80% de cobertura
 - La documentación debe actualizarse con cada cambio
-- Todas las funcionalidades de claculo numerico deberan tener testCAse unitarios que validen su correcto funcionamiento
+- Todas las funcionalidades de calculo numerico deberan tener testCAse unitarios que validen su correcto funcionamiento
 
 ## Fechas Límite y Hitos
 
@@ -42,3 +42,6 @@ Esto incluye rutas GET, POST, PUT y DELETE según entidades.
 ## Resolución de Conflictos
 
 - Comunicación directa con los miembros del equipo en las reuniones, se expone el punto y uno de los miembros del grupo actúa de mediador para poder concretar una solución.
+- Los desacuerdos se abordarán mediante comunicación directa y respetuosa durante las reuniones del equipo.
+- Cada parte expondrá su posición de manera argumentada.
+- Uno de los integrantes actuará como mediador, con el objetivo de facilitar una solución consensuada y alineada a los objetivos académicos y de calidad del proyecto.
