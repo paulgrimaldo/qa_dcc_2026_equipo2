@@ -13,8 +13,8 @@ help:
 	@echo "  healthcheck    - Verificar la salud del sistema"
 	@echo ""
 	@echo "Escenarios de Calidad - Semana 2:"
-	@echo "  Q1-HistoriaClinia   - Escenario Q1: Disponibilidad mínima de Contrato OpenAPI de historia clínica de mascotas"
-	@echo "  Q2-Latencia         - Escenario Q2: Latencia básica del endpoint de XXX"
+	@echo "  Q1-CapturarContratoApi   - Escenario Q1: Disponibilidad mínima de Contrato OpenAPI de Pet Clinic REST"
+	@echo "  Q2-Latencia              - Escenario Q2: Latencia básica del endpoint de XXX"
 	@echo "Utilidades:"
 	@echo "  clean          - Limpiar archivos temporales"
 
@@ -42,8 +42,8 @@ clean:
 smoke:
 	./scripts/smoke.sh
 
-Q1-HistoriaClinia:
-	./scripts/capturarHistoriaClinicaPet.sh
+Q1-CapturarContratoApi:
+	./scripts/capturarContratoApi.sh
 
 Q2-Latencia:
-	./scripts/revisionLatencia.sh
+	./scripts/revisarLatencia.sh

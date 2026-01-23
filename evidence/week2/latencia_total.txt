@@ -1,0 +1,26 @@
+Reporte de Medición de Latencia - Pet Clinic Api
+================================================
+
+Escenario: Q2 - Latencia básica del endpoint de inventario (Performance - Local)
+
+Fecha: 2026-01-23 13:59:01
+Endpoint: store/order/3
+URL Completa: http://localhost:8080/api/v3store/order/3
+
+Configuración:
+- Entorno: ejecución local, sin carga externa
+- Total de repeticiones: 15
+- Criterio de éxito: registrar time_total (opcional p95 <= 1.0s)
+
+Estadísticas de Rendimiento:
+-----------------------------
+Total de mediciones: 15
+Tiempo promedio:     5 ms (.005145 s)
+Tiempo mínimo:       3 ms (0.003362 s)
+Tiempo máximo:       9 ms (0.009050 s)
+
+Archivos generados:
+-------------------
+- Datos detallados: evidence/week2/latencia.csv
+- Resumen: evidence/week2/latencia_total.txt
+

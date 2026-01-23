@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script de Captura de Contrato OpenAPI para Pet Store
+# Script de Captura de Contrato OpenAPI para capturarContratoEnpoints
 # 
 # Escenario Q1: Disponibilidad mínima del contrato (Contract Availability)
 # 
