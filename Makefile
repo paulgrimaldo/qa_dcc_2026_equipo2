@@ -11,6 +11,10 @@ help:
 	@echo "  start-petclinic-rest - Iniciar la aplicación Pet Clinic REST"
 	@echo "  stop-petclinic-rest  - Detener la aplicación Pet Clinic REST"
 	@echo "  healthcheck    - Verificar la salud del sistema"
+	@echo ""
+	@echo "Escenarios de Calidad - Semana 2:"
+	@echo "  Q1-HistoriaClinia   - Escenario Q1: Disponibilidad mínima de Contrato OpenAPI de historia clínica de mascotas"
+	@echo "  Q2-Latencia         - Escenario Q2: Latencia básica del endpoint de XXX"
 	@echo "Utilidades:"
 	@echo "  clean          - Limpiar archivos temporales"
 
@@ -32,3 +36,14 @@ clean:
 	rm -rf tmp/
 	rm -f *.log
 	./setup/stop_sut.sh
+
+# primeros Scripts version QA Alcides
+
+smoke:
+	./scripts/smoke.sh
+
+Q1-HistoriaClinia:
+	./scripts/capturarHistoriaClinicaPet.sh
+
+Q2-Latencia:
+	./scripts/revisionLatencia.sh
