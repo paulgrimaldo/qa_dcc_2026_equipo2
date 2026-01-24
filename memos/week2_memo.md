@@ -11,20 +11,24 @@
 
 ## Logros
 - Escenarios de calidad definidos y documentados en `quality/escenarios.md` (Q1–Q4).
-- Script de captura del contrato OpenAPI e inventario implementado para respaldar disponibilidad mínima y forma básica de datos.
+- Script de captura del contrato OpenAPI y Veterinarios-Servicios implementado para respaldar disponibilidad mínima y forma básica de datos.
 - Medición de latencia implementada en 30 repeticiones con salida a CSV.
-- Pruebas de robustez ante entradas inválidas realizadas sobre `/pet/{id}` con registro de códigos HTTP y respuestas.
+- Pruebas de robustez ante entradas inválidas realizadas sobre `/api/pets/{id}` con registro de códigos HTTP y respuestas.
 - Evidencias generadas y organizadas en `evidence/week2/` para revisión reproducible.
 
 ## Evidencia principal
 - Escenarios y métricas: `quality/scenarios.md`.
 - Evidencia del contrato y “sanity” de respuesta:
-  - `scripts/capturarOrdenClinicaxID.sh`
+  - `scripts/captirarContratoApi.sh`
+  - `scripts/capturarVet.sh`
   - `evidence/week2/openapi.json`, `evidence/week2/openapi_http_code.txt`
-  - `evidence/week2/inventory.json`, `evidence/week2/inventory_http_code.txt`
+  - `evidence/week2/vets.json`, `evidence/week2/vets_http_code.txt`
 - Evidencia de latencia:
-  - `scripts/revisarLatency.sh`
-  - `evidence/week2/latency.csv`, `evidence/week2/latency_summary.txt`
+  - `scripts/revisarLatencia.sh`
+  - `evidence/week2/latencia.csv`, `evidence/week2/latencia_total.txt`
+- Evidencia de Robustez ante IDs inválidos
+  - `scripts/validarInputs.sh`
+  - `evidence/week2/invalid_ids.csv`, `evidence/week2/pet_<id>.json`
 
 
 ## Retos y notas

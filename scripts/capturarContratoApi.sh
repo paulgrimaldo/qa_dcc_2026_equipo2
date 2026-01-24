@@ -21,13 +21,13 @@ echo ""
 
 # Configuración
 OUTPUT_DIR="evidence/week2"
-BASE_URL="http://localhost:8080/api/v3"
+BASE_URL="http://localhost:9966/petclinic"
 CONTRACT_FILE="${OUTPUT_DIR}/openapi.json"
 HTTP_CODE_FILE="${OUTPUT_DIR}/openapi_http_code.txt"
 
 echo "Configuración:"
 echo "  - URL Base: ${BASE_URL}"
-echo "  - Endpoint: /openapi.json"
+echo "  - Endpoint: /v3/api-docs"
 echo "  - Directorio de salida: ${OUTPUT_DIR}"
 echo ""
 
@@ -37,7 +37,7 @@ mkdir -p "${OUTPUT_DIR}"
 # ===== Captura de Especificación OpenAPI =====
 echo "🔄 Capturando especificación OpenAPI..."
 
-code=$(curl -s -o "${CONTRACT_FILE}" -w "%{http_code}" "${BASE_URL}/openapi.json")
+code=$(curl -s -o "${CONTRACT_FILE}" -w "%{http_code}" "${BASE_URL}/v3/api-docs")
 echo "${code}" > "${HTTP_CODE_FILE}"
 
 # Verificar que el archivo contiene datos válidos de OpenAPI

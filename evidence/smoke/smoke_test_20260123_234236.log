@@ -1,0 +1,8 @@
+Resultados de Pruebas de Humo - 20260123_234236
+================================
+EXITO: Endpoint de Especificación OpenAPI (HTTP 200)
+EXITO: Buscar mascotas (HTTP 200)
+EXITO: Endpoint de veterinarios y servicios (HTTP 200)
+EXITO: Endpoint inválido (prueba negativa) (HTTP 500)
+
+RESUMEN: 4/4 pruebas aprobadas
