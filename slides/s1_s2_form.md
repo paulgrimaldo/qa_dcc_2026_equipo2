@@ -8,8 +8,11 @@
 ## Slide 1 — Semana 1 (Pregunta 1 + Respuesta 1)
 **Pregunta 1:** ¿Qué tipo de evidencia de pruebas reduce incertidumbre sobre calidad sin confundir “testing” con “quality assurance”?
 
+
 **Respuesta 1:**
-- Agregar respuesta concreta del grupo. Ideal un solo párrafo.
+
+ El Testing es un proceso que busca asegurar que el software funcione correctamente, a través de la prueba. La prueba lejos de garantizar un producto sin fallas actua como un revelador, por lo cual podemos decir que: “La prueba muestra la presencia de defectos no su ausencia”. La ISO 25010 es una norma que proporciona un modelo para evaluar la calidad, la misma define calidad como un conjuntos de aspectos que se pretenden evaluar para determinar esta denominada calidad del producto software. Entonces, la calidad no se prueba directamente y para reducir la incertidumbre va depender de los aspectos de Calidad que se deseen “probar” del software propuesto junto con la evidencia que aporten en cada aspecto que desee medir.
+
 
 **Evidencias planeadas (cada uno con oráculo + archivo):**
 - ___ → Oráculo: ___ → Evidencia: `evidence/week1/...`
@@ -26,6 +29,10 @@
 
 **Respuesta 2:**
 - Agregar respuesta concreta del grupo. Ideal un solo párrafo.
+
+
+
+
 
 **Escenarios S2 (elige 2 “estrella”):**
 - Escenario A: E: ___ | Entorno: ___ | R: ___ | Medida: ___ | Evidencia: `evidence/week2/...` | Falsación: ___  
