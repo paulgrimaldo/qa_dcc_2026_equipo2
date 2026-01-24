@@ -85,15 +85,17 @@ La calidad de software no es falsable cuando se expresa de manera general, por e
 
 ## Slide 4 — Amenazas a la validez 
 - **Interna:** warm-up/caché del contenedor afecta latencia → Mitigación: descartar primeras N corridas o reiniciar antes de medir.  
-- **Constructo:** 
-  - latencia local es proxy (no producción) → Mitigación: declarar el alcance “local baseline” y no extrapolar.  
+- **Constructo:** latencia local es proxy (no producción) → Mitigación: declarar el alcance “local baseline” y no extrapolar.  
+- **Externa:** 
+  - resultados dependen de máquina/red → Mitigación: registrar entorno (CPU/RAM/Docker) y repetir en otra máquina, considerando que la imagen base de docker se ejecuta en el puerto 9966.  
   - Por defecto el proyecto levanta una Base de datos en memoria y requiere configuración manual para levantar otro tipo de bases de datos (postgreSQL, MySQL)
-- **Externa:** resultados dependen de máquina/red → Mitigación: registrar entorno (CPU/RAM/Docker) y repetir en otra máquina, considerando que la imagen base de docker se ejecuta en el puerto 9966.  
 
 ---
 
 ## Slide 5 — Cierre (2 conclusiones)
 - **Evidencia más fuerte:** robustez IDs inválidos. Un 200 refuta el escenario.  
-- **Límite más crítico:** mediciones locales no generalizan a producción (validez externa).  
+- **Límite más crítico:** 
+  - Las mediciones se ejecutan de manera local no generalizan producción
+  - Las mediciones se ejecutan sobre una base de datos en memoria
 - **Mejora concreta (sin implementar hoy):** Mejorar el código de estado HTTP de 500 a 404 ante ruta no existentes para adecuarse a los estandares web. 
 ---
