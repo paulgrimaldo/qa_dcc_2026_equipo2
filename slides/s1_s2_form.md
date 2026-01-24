@@ -15,9 +15,18 @@
 
 
 **Evidencias planeadas (cada uno con oráculo + archivo):**
-- ___ → Oráculo: ___ → Evidencia: `evidence/week1/...`
-- ___ → Oráculo: ___ → Evidencia: `evidence/week1/...`
-- ___ → Oráculo: ___ → Evidencia: `evidence/week1/...`
+- CapturarContratoApi: **OpenAPI disponible**  
+  - Oráculo: HTTP 200 + contiene `"openapi"`  
+  - Evidencia: `evidence/week2/openapi.json`
+- Operación básica: **Inventario responde**  
+  - Oráculo: HTTP 200 + JSON bien formado  
+  - Evidencia: `evidence/week2/inventory.json`
+- Manejo mínimo de error: **endpoint inexistente**  
+  - Oráculo: HTTP 404  
+  - Evidencia: (registro en el log del script o captura del código)
+- Tiempo preliminar local (baseline):  
+  - Oráculo: registrar `time_total` (sin afirmar producción)  
+  - Evidencia: `evidence/week2/latency_summary.txt`
 
 **Límite (1 línea):**  
 - ___ (qué NO demuestra esta evidencia)
@@ -28,9 +37,9 @@
 **Pregunta 2:** ¿Cómo convertir “calidad” en afirmaciones falsables y medibles?
 
 **Respuesta 2:**
-- Agregar respuesta concreta del grupo. Ideal un solo párrafo.
 
 
+La calidad de software no es falsable cuando se expresa de manera general, por ejemplo, afirmando que un sistema “es de buena calidad”, ya que este tipo de enunciados carece de criterios objetivos de verificación. Para convertir la calidad de software en afirmaciones falsables y medibles, es necesario descomponerla en atributos específicos como funcionalidad, confiabilidad, eficiencia de desempeño, usabilidad, seguridad y mantenibilidad. Cada uno de estos atributos debe definirse mediante métricas cuantificables y criterios claros de aceptación, tales como tiempos de respuesta máximos, tasas de fallos permitidas, porcentaje de cobertura de pruebas o nivel de satisfacción del usuario. De esta forma, la calidad del software se transforma en un conjunto de afirmaciones verificables empíricamente, que pueden confirmarse o refutarse a partir de datos observables obtenidos mediante pruebas y mediciones.
 
 
 
