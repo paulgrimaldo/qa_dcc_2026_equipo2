@@ -3,7 +3,7 @@ Reporte de Medición de Latencia - Pet Clinic REST
 
 Escenario: Q2 - Latencia básica del endpoint de veterinarios y servicios (Performance - Local)
 
-Fecha: 2026-01-23 23:49:41
+Fecha: 2026-01-24 16:21:03
 Endpoint: /api/vets
 URL Completa: http://localhost:9966/petclinic/api/vets
 
@@ -15,9 +15,9 @@ Configuración:
 Estadísticas de Rendimiento:
 -----------------------------
 Total de mediciones: 15
-Tiempo promedio:     14 ms (.014023 s)
-Tiempo mínimo:       7 ms (0.007525 s)
-Tiempo máximo:       24 ms (0.024381 s)
+Tiempo promedio:     24 ms (.024632 s)
+Tiempo mínimo:       9 ms (0.009131 s)
+Tiempo máximo:       150 ms (0.150996 s)
 
 Archivos generados:
 -------------------
