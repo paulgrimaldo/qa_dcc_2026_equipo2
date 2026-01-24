@@ -7,6 +7,9 @@ El sistema actúa como System Under Test (SUT) para la aplicación de técnicas,
 
 ## Estructura del Repositorio
 - setup/ – Scripts para configurar el entorno de desarrollo y ejecución.
+- scripts/ - Scripts de pruebas y mediciones
+- evidence/ - Recolección de evidencias semanales
+- quality/ - Escenarios de calidad y glosario
 - memos/ – Memorandos semanales de progreso técnico y decisiones de QA.
 - AGREEMENTS.md – Acuerdos de trabajo, responsabilidades y estándares.
 - Makefile – Automatización de tareas de construcción y ejecución.
