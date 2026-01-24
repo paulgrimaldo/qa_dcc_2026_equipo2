@@ -85,7 +85,9 @@ La calidad de software no es falsable cuando se expresa de manera general, por e
 
 ## Slide 4 — Amenazas a la validez 
 - **Interna:** warm-up/caché del contenedor afecta latencia → Mitigación: descartar primeras N corridas o reiniciar antes de medir.  
-- **Constructo:** latencia local es proxy (no producción) → Mitigación: declarar el alcance “local baseline” y no extrapolar.  
+- **Constructo:** 
+  - latencia local es proxy (no producción) → Mitigación: declarar el alcance “local baseline” y no extrapolar.  
+  - Por defecto el proyecto levanta una Base de datos en memoria y requiere configuración manual para levantar otro tipo de bases de datos (postgreSQL, MySQL)
 - **Externa:** resultados dependen de máquina/red → Mitigación: registrar entorno (CPU/RAM/Docker) y repetir en otra máquina, considerando que la imagen base de docker se ejecuta en el puerto 9966.  
 
 ---
