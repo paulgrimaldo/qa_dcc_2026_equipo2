@@ -63,7 +63,7 @@ La calidad de software no es falsable cuando se expresa de manera general, por e
 | Claim | Escenario | Métrica | Evidencia (archivo) | Oráculo (pass/fail) |
 |---|---|---|---|---|
 | Contrato accesible | Q1-CapturarContratoApi | HTTP + contiene `"openapi"` | `evidence/week2/openapi.json`, `openapi_http_code.txt` | pass si `200` y contiene `"openapi"` |
-| Tiempo local preliminar | Q2-Latencia (30 runs) | `time_total` por run (p95) | `evidence/week2/latencia.csv`, `latencia_total.txt` | pass si HTTP 200 + (opcional) p95<=X |
+| Tiempo local preliminar | Q2-Latencia (30 runs) | `time_total` por run (p95) | `evidence/week2/latencia.csv`, `latencia_total.txt` | pass si HTTP 200 |
 | Entradas inválidas no aceptadas | Q3-ValidarInputs | `http_code` por caso | `evidence/week2/invalid_ids.csv`, `invalid_pet_<id>.json` | pass si todos `http_code != 200` |
 ---
 
