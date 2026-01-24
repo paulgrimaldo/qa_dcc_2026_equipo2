@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Script de Medición de Latencia para la Aplicación Pet Clinic Api
+# Script de Medición de Latencia para la Aplicación Pet Clinic REST
 # 
-# Escenario Q2: Latencia básica del endpoint de inventario (Performance - Local)
+# Escenario Q2: Latencia básica del endpoint de veterinarios y servicios (Performance - Local)
 # 
 # Este script atiende al escenario Q2 midiendo el tiempo de respuesta del endpoint
-# de inventario realizando múltiples iteraciones para obtener estadísticas confiables.
+# de veterinarios y servicios realizando múltiples iteraciones para obtener estadísticas confiables.
 #
-# Estímulo: se solicita GET store/order/3
+# Estímulo: se solicita GET /api/vets
 # Entorno: ejecución local, sin carga externa, 15 repeticiones consecutivas
 # Respuesta: el SUT responde con HTTP 200
 # Medida (falsable): registrar time_total por ejecución; (opcional) p95 <= 1.0s
-# Evidencia: evidence/week2/latency.csv y evidence/week2/latency_summary.txt
+# Evidencia: evidence/week2/latencia.csv y evidence/week2/latencia_total.txt
 #
 # Uso: ./revisarLatencia.sh [número_de_iteraciones]
 # Ejemplo: ./revisarLatencia.sh 15
@@ -21,13 +21,13 @@ set -euo pipefail
 
 # Configuración
 N="${1:-15}"  # Número de repeticiones (15 por defecto)
-BASE_URL="http://localhost:8080/api/v3"
-ENDPOINT="store/order/3"
+BASE_URL="http://localhost:9966/petclinic"
+ENDPOINT="/api/vets"
 OUTPUT_DIR="evidence/week2"
 RESULTS_FILE="${OUTPUT_DIR}/latencia.csv"
 SUMMARY_FILE="${OUTPUT_DIR}/latencia_total.txt"
 
-echo "📊 Escenario Q2: Latencia del Endpoint de Ordenes de Pet Clinic"
+echo "📊 Escenario Q2: Latencia del Endpoint de Veterinarios y Servicios de Pet Clinic REST"
 echo "====================================================="
 echo ""
 echo "Configuración:"
@@ -85,10 +85,10 @@ max_time_ms=$(echo "$max_time * 1000" | bc -l | cut -d. -f1)
 
 # Guardar resumen en archivo
 cat > "${SUMMARY_FILE}" << EOF
-Reporte de Medición de Latencia - Pet Clinic Api
+Reporte de Medición de Latencia - Pet Clinic REST
 ================================================
 
-Escenario: Q2 - Latencia básica del endpoint de inventario (Performance - Local)
+Escenario: Q2 - Latencia básica del endpoint de veterinarios y servicios (Performance - Local)
 
 Fecha: $(date '+%Y-%m-%d %H:%M:%S')
 Endpoint: ${ENDPOINT}
