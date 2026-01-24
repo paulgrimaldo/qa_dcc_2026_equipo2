@@ -4,6 +4,7 @@
 Este repositorio contiene los artefactos técnicos, código y documentación asociados al proyecto QA Doctorado 2026, desarrollado por el Equipo 2.
 El proyecto implementa un servicio backend REST para la gestión de una clínica veterinaria utilizando el framework Spring Boot. El servicio expone recursos CRUD (Create, Read, Update, Delete) para las entidades principales del dominio, siguiendo un estilo de arquitectura orientada a servicios.
 El sistema actúa como System Under Test (SUT) para la aplicación de técnicas, métricas y métodos de Aseguramiento de la Calidad (QA) en un contexto académico.
+Además, este repositorio se utiliza como base para la ejecución de pruebas, generación de métricas y documentación de resultados del proceso de QA durante el curso.
 
 ## Estructura del Repositorio
 - setup/ – Scripts para configurar el entorno de desarrollo y ejecución.
