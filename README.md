@@ -11,7 +11,9 @@ Además, este repositorio se utiliza como base para la ejecución de pruebas, ge
 - scripts/ - Scripts de pruebas y mediciones
 - evidence/ - Recolección de evidencias semanales
 - quality/ - Escenarios de calidad y glosario
+- riesgos/ - Evaluación de riesgos y estrategia de pruebas
 - memos/ – Memorandos semanales de progreso técnico y decisiones de QA.
+- slides/ - Materiales de presentación
 - AGREEMENTS.md – Acuerdos de trabajo, responsabilidades y estándares.
 - Makefile – Automatización de tareas de construcción y ejecución.
 - README.md – Este documento principal.
