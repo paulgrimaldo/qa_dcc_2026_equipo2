@@ -1,7 +1,7 @@
 # Memo de Progreso - Semana 3
 
 **Fecha**: 31/01/2026  \
-**Equipo**: Equipo X  \
+**Equipo**: Equipo 2  \
 **Semana**: 3 de 8
 
 ## Objetivos de la semana
@@ -26,6 +26,7 @@
 ## Retos y notas
 - Scripts actuales escriben evidencia en `evidence/week2/`; para mantener trazabilidad semanal se copió a `week3` y se documentó en `RUNLOG.md`.
 - Variabilidad de latencia en entorno local: warm-up/caché y carga del host pueden sesgar mediciones.
+- Por defecto el proyecto levanta una Base de datos en memoria y requiere configuración manual para levantar otro tipo de bases de datos (postgreSQL, MySQL), esto puede sesgar las mediciones.
 - Oráculo mínimo “HTTP != 200” 
 
 ## Lecciones aprendidas
@@ -33,11 +34,11 @@
 - Sin trazabilidad explícita (archivo + comando + oráculo) la evidencia pierde valor para revisión por terceros.
 - Declarar riesgo residual evita conclusiones fuertes fuera del alcance (p.ej. producción/carga).
 
-## Próximos pasos (Semana 4) - (Potenciales pasos, a ser discutidos con el equipo)
+## Próximos pasos (Semana 4)
 - a la espera de revision Grupal y analisar el contenido para la siguiente semana
 
 
 ---
 
-**Preparado por**: Equipo X  \
+**Preparado por**: Equipo 2  \
 **Próxima revisión**: Semana 4
