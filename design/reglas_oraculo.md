@@ -6,7 +6,7 @@
 
 - **OR1 (Ejecución):** Todas las solicitudes registran `http_code` y persisten el cuerpo de la respuesta como evidencia.
 - **OR2 (Cuerpo de la respuesta):** La respuesta **no** debe ser HTML (Verificación mediante `header` valor de `Content-Type=application/json` )
-- **OR3 (Formato de errores):** La respuesta debe retornar  `http_code=404` Ante ausencia de valores y `http_code=500` ante caulquier otro escenario de error.
+- **OR3 (Formato de errores):** La respuesta debe retornar  `http_code=404` Ante ausencia de valores y `http_code=500` ante cualquier otro escenario de error.
 - **OR4 (JSON Valido cuando no hay errores de tipo 500)** Si `http_code!=500` Entonces el `header Content-Type` siempre sera `application/json`
 
 ## Reglas por partición
