@@ -1,0 +1,8 @@
+Semana 4 — Resumen
+- Total casos: 19
+- Pass (oráculo mínimo): 12
+- Fail (oráculo mínimo): 7
+
+Notas:
+- OR7–OR9 se reportan como estrictas (no bloqueantes)
+- test_case_19 ejecuta 5 veces el mismo input para idempotencia
