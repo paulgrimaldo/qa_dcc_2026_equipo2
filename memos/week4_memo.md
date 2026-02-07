@@ -16,6 +16,7 @@
 ---
 
 ## Logros
+Se formalizó el dominio de entrada del endpoint aplicando EQ/BV para derivar un conjunto finito de pruebas a partir de un espacio infinito, alineado con las prácticas de Input Modeling del NIST
 
 - **Endpoint seleccionado:** `GET /api/vets/{id}` (Spring Petclinic, base URL configurable).
 - **Oráculos definidos:** 9 reglas (OR1–OR9) documentadas en `design/reglas_oraculo.md`:
@@ -55,7 +56,8 @@
 ---
 
 ## Lecciones aprendidas
-
+- La distinción entre Valores (la entrada específica) y Factores (el parámetro) ayuda a estructurar las pruebas.
+- Aunque probamos un solo parámetro, el enfoque sistemático prepara el terreno para futuras pruebas combinatorias (pairwise) si se decidieran introducir más variables (ej. Headers, Roles de usuario).
 - El diseño sistemático (EQ/BV) hace explícitos los supuestos y reduce la arbitrariedad en la selección de casos.
 - Separar oráculos mínimos vs estrictos mantiene la falsabilidad sin depender de datos no controlados ni de la existencia de recursos concretos.
 - La evidencia por caso (`*_response.json`) más resultados agregados (`results.csv`, `resumen.txt`) facilita la revisión, auditoría y análisis de fallos.

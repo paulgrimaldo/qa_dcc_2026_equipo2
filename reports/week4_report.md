@@ -11,6 +11,7 @@
 ---
 
 ## 2) Técnica de diseño utilizada
+Se aplicó la fase de Input Parameter Modeling para discretizar el dominio infinito del parámetro `{id}`. Dado que el SUT expone una interfaz de un solo parámetro directo, la estrategia combinatoria se reduce a una cobertura 1-way (Each Choice), asegurando que cada clase de equivalencia y valor límite seleccionado sea ejercitado al menos una vez
 
 **Equivalencia (EQ) + Valores Límite (BV)** sobre el parámetro `{id}`.
 
@@ -21,7 +22,7 @@
 
 - **BV:** se ejercitan puntos cercanos al límite (`-1`, `0`, `1`), IDs grandes (`999999`, `999999999`), extremos de entero (`2147483647`, `-2147483648`) y un caso de idempotencia (múltiples llamadas con el mismo `{id}`).
 
-La justificación es metodológica: se evita inventar casos ad hoc y se hace explícito el criterio de selección de entradas, facilitando trazabilidad y repetición.
+Este enfoque sistemático garantiza que, aunque no hay interacción entre múltiples parámetros, se cubren los fallos desencadenados por un único valor de entrada
 
 ---
 
@@ -41,7 +42,7 @@ Las reglas están definidas en `design/reglas_oraculo.md`.
 - **OR5 (ID inválido no aceptado):** Si `{id}` es no numérico o numérico ≤ 0, la respuesta **no** debe ser `200`.
 - **OR6 (ID numérico válido):** Si `{id}` es numérico y > 0, `http_code` debe estar en `{200, 404}`.
 
-### Oráculos estrictos (opcionales, no bloqueantes)
+### Oráculos estrictos
 
 - **OR7:** Si `http_code == 200`, el cuerpo no debería ser un JSON vacío `{}`.
 - **OR8:** Si `http_code == 200`, el cuerpo debería incluir el campo `"id"` (idealmente coherente con el `{id}` solicitado).
@@ -51,7 +52,7 @@ En el script, OR7–OR9 se registran en `notes` como `STRICT_PASS` / `STRICT_FAI
 
 ---
 
-## 4) Cobertura afirmada (y lo que NO se afirma)
+## 4) Cobertura afirmada y no afirmada
 
 **Se afirma:**
 
@@ -68,16 +69,14 @@ En el script, OR7–OR9 se registran en `notes` como `STRICT_PASS` / `STRICT_FAI
 
 ---
 
-## 5) Amenazas a la validez (interno / constructo / externo)
+## 5) Amenazas a la validez
 
-- **Interna:** El estado y los datos del SUT (veterinarios existentes) pueden cambiar; un mismo `{id}` puede pasar de 200 a 404 o viceversa entre ejecuciones.  
-  *Mitigación:* uso de oráculos que no dependen de la existencia del recurso (se permite 200 o 404 para P3); casos con `ID_EXISTENTE` e `ID_INEXISTENTE` configurables por variables de entorno (`ID_EXISTENTE`, `ID_INEXISTENTE`) para adaptar a un entorno conocido.
+- **Interna:** Los datos en el servidor (veterinarios) pueden cambiar, haciendo que un `{id}` válido pase de devolver `200` a `404`. Mitigación: Oráculos flexibles que aceptan {200, 404} para particiones válidas y uso de variables de entorno (`ID_EXISTENTE`) para inyectar datos conocidos.
+- El diseño varía únicamente el parámetro {id}, ignorando posibles fallos desencadenados por la interacción con otros factores (Headers, Cookies, Estado de sesión), un riesgo clave citado en NIST SP 800-142. *Mitigación*: Se declara el alcance como Input Parameter Modeling unitario; no se afirma cobertura de integración o combinatoria compleja
 
-- **Constructo:** Usar códigos HTTP y formato JSON como proxy de “robustez” no cubre otras dimensiones (seguridad, integridad semántica completa, accesibilidad).  
-  *Mitigación:* declarar explícitamente el alcance del atributo evaluado (manejo de entradas y consistencia de formato de respuesta).
+- **Constructo:** Usar códigos HTTP y JSON válido como medida de calidad no garantiza seguridad ni corrección funcional completa (ej. el servidor podría devolver un JSON bien formado con datos erróneos). *Mitigación*: Se definen oráculos "Estrictos" (OR8, OR9) para evaluar consistencia semántica básica, aunque no sean bloqueantes.
 
-- **Externa:** Los resultados dependen del entorno (Docker/local, red, versión del SUT y de la BD).  
-  *Mitigación:* registrar entorno y versión del SUT; repetir en otra máquina o instancia si se requiere generalización; el script permite `BASE_URL` para distintos despliegues.
+- **Externa:** Los resultados (especialmente tiempos y errores 500) pueden depender de la infraestructura (Docker vs Local, Red). *Mitigación*: El reporte incluye la versión del SUT y el script permite configurar BASE_URL para replicar la prueba en distintos entornos, favoreciendo la generalización de los hallazgos.
 
 ---
 

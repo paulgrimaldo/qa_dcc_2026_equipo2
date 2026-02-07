@@ -1,13 +1,14 @@
 # Casos de prueba sistemáticos — Semana 4
 
-**Técnica usada:** Equivalencia (EQ) + Valores Límite (BV)
-
-**Parámetro:** `{id}` en `GET /api/vets/{id}`.
+- **Estratégia de diseño:** Input parameter modeling
+- **Técnica usada para la selección de valores:** Equivalence Partitionong (EQ) +  Boundary value analysis (BV)
+- **Parámetro:** `{id}` en el recurso `GET /api/vets/{id}`.
 
 ## Particiones (EQ) sobre `{id}`
-- **P1 - No numérico:** [`abc`, `1.5`]
-- **P2 Numérico ≤ 0:** [`0`, `-1`]
-- **P3 Numérico:** [`1`, `2`, `999999`, `Integer.Max=2147483647`]
+**Factor A:** Se han identificado los siguientes valores representativos basado en las restricciones de dominio
+- **P1 - No numérico (String, Float):** [`abc`, `1.5`, `%31`]
+- **P2 Numérico ≤ 0 (Entero menor a 0):** [`0`, `-1`, `Integer.Min`]
+- **P3 Numérico (Válido nominal y límite):** [`1`, `2`, `999999`, `Integer.Max=2147483647`]
 
 ## Valores límite (BV) sobre `{id}`
 - Cercanos a 0: `-1`, `0`, `1`

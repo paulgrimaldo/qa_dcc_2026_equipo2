@@ -2,7 +2,8 @@
 
 **Objeto de prueba:** `GET /api/vets/{id}`
 
-## Reglas mínimas
+## Reglas mínimas o Universal properties
+Estas reglas deben cumplirse para cualquier valor del modelo de entrada
 
 - **OR1 (Ejecución):** Todas las solicitudes registran `http_code` y persisten el cuerpo de la respuesta como evidencia.
 - **OR2 (Cuerpo de la respuesta):** La respuesta **no** debe ser HTML (Verificación mediante `header` valor de `Content-Type=application/json` )
