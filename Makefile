@@ -60,6 +60,12 @@ QA-week2: Q1-CapturarContratoApi Q2-Latencia Q3-ValidarInputs Q4-Vets
 	@echo "✅ Todos los escenarios Q1-Q4 completados"
 	@echo "================================"
 
+systematic-cases: healthcheck
+	./scripts/casos_sistematicos.sh
+
+quality-gate:
+	./ci/run_quality_gate.sh
+
 clean:
 	rm -rf tmp/
 	rm -f *.log
