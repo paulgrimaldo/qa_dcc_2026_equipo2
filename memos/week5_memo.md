@@ -4,47 +4,48 @@
 **Semana:** 5 de 8
 
 ## Objetivos de la semana
-- Definir un **quality gate** alineado con los riesgos priorizados en Semana 3.
-- Convertir el gate en una ejecución reproducible tanto en entorno local como en CI.
-- Generar y publicar evidencia de ejecución de Semana 5 como artefacto versionado.
-- Mantener la trazabilidad entre riesgos (S3), diseño sistemático y oráculos/casos (S4), y decisiones de aceptación/rechazo (S5).
+- Definir un **quality gate** alineado con los riesgos priorizados (Semana 3) y con oráculos/casos sistemáticos (Semana 4).
+- Convertir el gate en una **ejecución reproducible** en entorno local y en CI mediante un script único.
+- Generar y publicar **evidencia versionada** de la ejecución del gate para auditoría y trazabilidad.
 
 ## Logros
-- Se definió un **quality gate** explícito para el endpoint `GET /api/vets/{id}` que integra:
-  - cumplimiento de oráculos mínimos (OR1–OR6);
-  - registro de oráculos estrictos (OR7–OR9) como señal de calidad no bloqueante;
-  - criterio de fallo inmediato ante respuestas 5xx en particiones inválidas (alineado con OR3).
-- Se dejó el gate **ejecutable en local/CI** mediante script parametrizable (variables de entorno y salida estructurada), permitiendo reproducibilidad en distintos entornos del SUT.
-- Se generó la **evidencia Week 5** y se publicó como **artifact** de ejecución (resultados agregados, resumen y evidencia por caso) para auditoría y comparación histórica.
-- Se consolidó la **trazabilidad continua con Semana 4**, conectando:
-  - riesgos priorizados (S3) → criterios de aceptación del gate;
-  - oráculos/casos sistemáticos (S4) → veredictos automáticos del gate;
-  - evidencia de resultados (S5) → insumos para decisiones de mejora del SUT y ajuste de pruebas.
+- Se documentó el **quality gate** en `ci/quality_gates.md` con cuatro checks explícitos:
+  1. **Contrato de las APIs disponible** — El SUT expone su contrato (OpenAPI); oráculo: HTTP 200 y cuerpo con "openapi". Relacionado con R1 (Disponibilidad/Contrato).
+  2. **Robustez ante entradas inválidas** — GET /api/pets/{id} con IDs inválidos no debe devolver HTTP 200. Relacionado con R2 (Robustez/HTTP 200).
+  3. **Rendimiento/latencia** — GET /api/vets responde con HTTP 200; evidencia de latencia en entorno local (Semana 2). Relacionado con escenario Q2 (Performance - Local).
+  4. **Casos sistemáticos** — Conjunto derivado por método, evaluado con oráculos; cualquier `FAIL` requiere explicación o acción. Relacionado con diseño de Semana 4 (`design/test_cases.md`, `design/reglas_oraculo.md`).
+- Se implementó el gate ejecutable en **`ci/run_quality_gate.sh`**, que orquesta: arranque del SUT, healthcheck, captura de contrato, listado de vets, validación de entradas inválidas y ejecución de casos sistemáticos; luego consolida la evidencia en `evidence/week5/`.
+- Se generó **evidencia estructurada**: RUNLOG.md (pasos y fecha), SUMMARY.md (resumen del gate), openapi.json, vets.json, invalid_ids.csv, invalid_pet_*.json, systematic_results.csv y systematic_summary.txt, permitiendo reproducibilidad y comparación histórica.
+- Se mantuvo **trazabilidad** entre riesgos (S3), diseño y oráculos (S4), y criterios del gate (S5), con referencias explícitas en `ci/quality_gates.md`.
 
 ## Evidencia principal
 | Tipo | Ubicación |
-|---|---|
-| Definición del quality gate (criterios y umbrales) | `reports/week5_report.md` |
-| Ejecución del gate local/CI | `scripts/quality_gate.sh` |
-| Resultados agregados Week 5 | `evidence/week5/results.csv` |
-| Resumen ejecutivo Week 5 | `evidence/week5/resumen.txt` |
-| Evidencia por caso Week 5 | `evidence/week5/test_case_XX_response.json` |
-| Artifact publicado (CI) | `artifacts/week5/` |
+|------|-----------|
+| Definición del quality gate (checks y oráculos) | `ci/quality_gates.md` |
+| Script de ejecución del gate (local/CI) | `ci/run_quality_gate.sh` |
+| Invocación vía Makefile | `make quality-gate` → genera `evidence/week5/` |
+| Log de ejecución | `evidence/week5/RUNLOG.md` |
+| Resumen del gate | `evidence/week5/SUMMARY.md` |
+| Contrato API | `evidence/week5/openapi.json`, `openapi_http_code.txt` |
+| Inventario vets | `evidence/week5/vets.json`, `vets_http_code.txt` |
+| Entradas inválidas | `evidence/week5/invalid_ids.csv`, `invalid_pet_*.json` |
+| Casos sistemáticos | `evidence/week5/systematic_results.csv`, `systematic_summary.txt` |
+| CI workflow | `.github/workflows/ci.yml` |
 
 ## Retos y notas
-- **Dependencia del estado del SUT:** la existencia de recursos sigue afectando resultados de IDs válidos (>0), por lo que el gate conserva tolerancia controlada `{200,404}` para evitar falsos negativos.
-- **Persistencia de errores 5xx en entradas inválidas:** estos casos permanecen como hallazgos críticos y se mantienen como condición bloqueante en el gate por su impacto en robustez.
-- **Portabilidad de entornos:** se reforzó el uso de variables (`BASE_URL`, `ID_EXISTENTE`, `ID_INEXISTENTE`) para desacoplar la ejecución del entorno específico.
-- **Equilibrio entre estrictitud y estabilidad:** OR7–OR9 siguen siendo no bloqueantes para no penalizar escenarios con alta variabilidad de datos, pero se conservan como alerta temprana.
+- **Dependencia del estado del SUT:** el gate asume SUT levantado y saludable; `run_sut.sh` y `healthcheck_sut.sh` forman parte del flujo.
+- **Reutilización de evidencia:** el script copia artefactos de week2 (contrato, vets, invalid_ids) y week4 (resultados sistemáticos) a week5 para centralizar la evidencia del gate en un solo directorio.
+- **Criterio de éxito:** el gate no certifica “calidad total”; entrega evidencia reproducible y ayuda a frenar regresiones obvias según los riesgos priorizados.
+- **Casos sistemáticos:** un `FAIL` en los resultados requiere explicación o acción del equipo; el gate deja la evidencia lista para esa revisión.
 
 ## Lecciones aprendidas
-- Un quality gate efectivo debe reflejar tanto riesgo de negocio (S3) como comportamiento técnico observable (S4).
-- Separar criterios **bloqueantes** y **no bloqueantes** mejora la gobernanza de calidad sin frenar la entrega por ruido de entorno.
-- La publicación de artefactos por corrida acelera revisiones de pares, auditoría y análisis comparativo entre semanas.
-- La trazabilidad explícita entre semanas facilita justificar decisiones de aceptación/rechazo y priorizar mejoras con evidencia.
+- Un quality gate efectivo debe reflejar riesgos de negocio (S3) y comportamiento técnico observable (S4), documentado en un único lugar (`ci/quality_gates.md`).
+- Un script único en `ci/` que orquesta pasos y consolida evidencia en `evidence/week5/` simplifica la reproducción en local y en CI.
+- Centralizar la evidencia del gate en un directorio por semana facilita auditoría, comparación entre corridas y publicación de artefactos.
+- La trazabilidad explícita (riesgos → oráculos → checks → evidencia) permite justificar decisiones de aceptación/rechazo con evidencia.
 
 ## Próximos pasos
-- Ajustar umbrales del gate con base en tendencia de fallos (especialmente OR3 y OR5) en corridas consecutivas.
-- Incorporar repetición automática para casos críticos y medir estabilidad (variación inter-ejecución/flakiness).
-- Expandir cobertura con atributos adicionales (headers, roles, autenticación) y evaluar diseño combinatorio (por pares).
-- Formalizar criterios de salida por atributo de calidad y preparar propuesta de mejora del SUT sobre manejo de errores inválidos.
+- Integrar `ci/run_quality_gate.sh` en el pipeline de CI (ejecución en cada cambio o en horarios definidos).
+- Ajustar umbrales o checks con base en tendencia de fallos en corridas consecutivas (p. ej. robustez y casos sistemáticos).
+- Incorporar criterios de latencia cuantitativos si se dispone de métricas estables (p. ej. percentiles).
+- Formalizar criterios de salida por atributo de calidad y proponer mejoras al SUT cuando la evidencia lo justifique.
