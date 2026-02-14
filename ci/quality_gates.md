@@ -29,7 +29,6 @@ Este gate **no** pretende certificar “calidad total”, sino entregar **eviden
 - Claim: endpoint GET /api/vets/{id} responde de forma bien formada.
 - Evidencia: `evidence/week5/inventory.json` y `evidence/week5/inventory_http_code.txt`
 - Oráculo: HTTP 200 y cuerpo JSON bien formado.
-<img width="1780" height="1286" alt="image" src="https://github.com/user-attachments/assets/3367deec-39e0-4b05-854d-69fd8e471966" />
 - Relación: Semana 4 / robustez operativ
 
 ## Alta señal / bajo ruido (confiabilidad)
@@ -39,3 +38,4 @@ Este gate **no** pretende certificar “calidad total”, sino entregar **eviden
 
 ## Cómo ejecutar localmente (equivalente a CI)
 - `make quality-gate` (genera `evidence/week5/`).
+
