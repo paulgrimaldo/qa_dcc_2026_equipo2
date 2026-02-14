@@ -17,7 +17,7 @@ echo "Iniciando contenedor de Pet Clinic REST..."
 docker run -d --name spring-petclinic-rest -p 9966:9966 springcommunity/spring-petclinic-rest
 
 # Esperar un momento para que el contenedor inicie
-sleep 5
+sleep 20
 
 # Verificar si el contenedor está en ejecución
 if docker ps | grep -q spring-petclinic-rest; then
