@@ -1,7 +1,7 @@
 # Memo de Progreso — Semana 6
 Fecha: 19/02/2026  
 Equipo: Equipo 2  
-Semana: 6 de 8  
+
 
 ## Objetivos de la semana
 - Ejecutar un gaming drill sobre el quality gate definido en Semana 5.
