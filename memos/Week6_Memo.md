@@ -21,7 +21,7 @@ Semana: 6 de 8
 ### 1. Preparación
 - Creación de la rama `week6`.
 - Creación de estructura:
-- 
+
 ### 2. Táctica de gaming seleccionada
 **Táctica:** ejecutar solo una parte de los casos sistemáticos sin declararlo.  
 **Check afectado:** validación del conjunto sistemático de Semana 4.  
@@ -33,7 +33,7 @@ Documentado en `ci/gaming_drill.md`.
 - Se modificó temporalmente el gate ejecutando solo 5 de 19 casos.
 - Ejecución con:
 
-- - El gate marcó PASS debido a evidencia incompleta pero consistente con la manipulación.
+- El gate marcó PASS debido a evidencia incompleta pero consistente con la manipulación.
 - En `evidence/week6/RUNLOG.md` se registró:
 - Comando exacto
 - Fecha/hora
@@ -44,9 +44,7 @@ Documentado en `ci/gaming_drill.md`.
 **Defensa:** agregar un módulo de integridad que valide:
 1. Conteo exacto: deben existir los 19 casos definidos.
 2. Hash del archivo de definición de casos: comparado contra un valor almacenado.
-
 Si alguna condición falla, el gate aborta y registra “possible gaming detected”.
-
 Registrado en:
 - `ci/gate_change_log.md` (cambio, impacto, fecha)
 - `ci/gaming_drill.md` (cómo bloquea la táctica)
@@ -66,9 +64,7 @@ Se añadió `ci/run_gate_gaming_drill.sh` que:
 - Genera `evidence/week6/summary.txt` con un resumen comparativo.
 
 ### 7. Integración en Makefile
-Se añadió el target:
-
-y genera evidencia completa en `evidence/week6/`.
+Se añadió el targety genera evidencia completa en `evidence/week6/`.
 
 ## Evidencia principal
 | Tipo | Ubicación |
