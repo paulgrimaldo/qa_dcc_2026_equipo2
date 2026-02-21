@@ -1,0 +1,5 @@
+id,status,response_file
+-1,404,invalid_pet_-1.json
+0,404,invalid_pet_0.json
+999999,404,invalid_pet_999999.json
+abc,404,invalid_pet_abc.json

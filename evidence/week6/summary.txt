@@ -1,0 +1,15 @@
+Semana 6 — Resultado del Gaming Drill
+
+BEFORE (gate legacy, sin integridad): rc=0
+- Esperado: el gate puede completar y la evidencia en evidence/week5 existe
+  aunque los scripts no hayan ejercitado el SUT (evidencia falseada).
+
+AFTER (gate actual, con scripts falseados): verify_rc=3, gate_rc=3
+- Primero ci/verify_gate_integrity.sh (registra 'Hash distinto' si los scripts están falseados).
+- run_quality_gate solo se ejecuta si verify OK (✅ Integridad verificada); si no, el error queda en gate_output y no se corre el gate.
+- Tras AFTER, scripts restaurados desde ci/backup/.
+
+Evidencia:
+- evidence/week6/before/gate_output.txt
+- evidence/week6/before/systematic_summary.txt, systematic_results.csv, etc.
+- evidence/week6/after/gate_output.txt

@@ -1,0 +1,7 @@
+SYSTEMATIC TEST SUMMARY
+=======================
+Project: PetClinic API
+Environment: Mock-Testing
+Total Executions: 150
+Global Status: stable
+Maintainer: QA-Team

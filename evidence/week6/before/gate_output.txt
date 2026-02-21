@@ -1,0 +1,88 @@
+Iniciando aplicación PetClinic REST...
+Descargando imagen de PetClinic REST...
+Using default tag: latest
+latest: Pulling from springcommunity/spring-petclinic-rest
+Digest: sha256:6cb43eb7fab775436452e2a8a9ecd013eab97d8a7eecafdf15ae1cb5d83624de
+Status: Image is up to date for springcommunity/spring-petclinic-rest:latest
+docker.io/springcommunity/spring-petclinic-rest:latest
+Iniciando contenedor de Pet Clinic REST...
+docker: Error response from daemon: Conflict. The container name "/spring-petclinic-rest" is already in use by container "24c3b06a8b03f4d0a37b897fb7d0f4fbc5db1ccb03f228dc352349f8011d998d". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+Pet Clinic REST iniciado exitosamente en http://localhost:9966
+Documentación de la API disponible en: http://localhost:9966/petclinic/swagger-ui.html
+Realizando verificación de salud en la aplicación Pet Clinic REST...
+Verificando salud de la aplicación...
+✅ Pet Clinic REST está saludable y respondiendo
+📊 Estado de la aplicación: En ejecución
+🌐 Endpoint: http://localhost:9966
+🔍 Estado del contenedor:
+24c3b06a8b03   spring-petclinic-rest   0.19%     621.5MiB / 7.654GiB   7.93%     69.5kB / 226kB   104MB / 3.6MB   49
+Archivo falseado creando ejemplo
+====================================================
+
+Archivos creados en: evidence/week2
+total 88
+-rw-r--r--  1 paulgrimaldo  staff   45 Feb 21 00:15 invalid_ids.csv
+-rw-r--r--  1 paulgrimaldo  staff  247 Feb 21 00:15 invalid_pet_-1.json
+-rw-r--r--  1 paulgrimaldo  staff  243 Feb 21 00:15 invalid_pet_0.json
+-rw-r--r--  1 paulgrimaldo  staff  263 Feb 21 00:15 invalid_pet_999999.json
+-rw-r--r--  1 paulgrimaldo  staff  251 Feb 21 00:15 invalid_pet_abc.json
+-rw-r--r--  1 paulgrimaldo  staff  802 Feb  1 22:53 latencia_total.txt
+-rw-r--r--  1 paulgrimaldo  staff  186 Feb  1 22:53 latencia.csv
+-rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 01:05 openapi_http_code.txt
+-rw-r--r--  1 paulgrimaldo  staff  252 Feb 21 01:05 openapi.json
+-rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 00:15 vets_http_code.txt
+-rw-r--r--  1 paulgrimaldo  staff  533 Feb 21 00:15 vets.json
+Archivo falseado creando ejemplo
+====================================================
+
+Archivos de veterinarios creados exitosamente en: evidence/week2
+invalid_ids.csv
+invalid_pet_-1.json
+invalid_pet_0.json
+invalid_pet_999999.json
+invalid_pet_abc.json
+latencia_total.txt
+latencia.csv
+openapi_http_code.txt
+openapi.json
+vets_http_code.txt
+vets.json
+Archivo falseado creando ejemplo
+====================================================
+
+Proceso finalizado. Archivos generados:
+evidence/week2/invalid_pet_-1.json
+evidence/week2/invalid_pet_0.json
+evidence/week2/invalid_pet_999999.json
+evidence/week2/invalid_pet_abc.json
+Resumen en: evidence/week2/invalid_ids.csv
+Archivo falseado creando ejemplo
+====================================================
+
+Archivos generados exitosamente en: evidence/week4
+results.csv
+resumen.txt
+RUNLOG.md
+SUMMARY.MD
+test_case_01_response.json
+test_case_02_response.json
+test_case_03_response.json
+test_case_04_response.json
+test_case_05_response.json
+test_case_06_response.json
+test_case_07_response.json
+test_case_08_response.json
+test_case_09_response.json
+test_case_10_response.json
+test_case_11_response.json
+test_case_12_response.json
+test_case_13_response.json
+test_case_14_response.json
+test_case_15_response.json
+test_case_16_response.json
+test_case_17_response.json
+test_case_18_response.json
+test_case_19_response.json
+✅ Quality gate completado. Evidencia en evidence/week5/

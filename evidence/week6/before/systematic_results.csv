@@ -1,0 +1,5 @@
+test_id,endpoint,method,status_code,result
+TC-001,http://localhost:9966/petclinic/api/vets,GET,200,PASS
+TC-002,http://localhost:9966/petclinic/api/vets/1,GET,200,PASS
+TC-003,http://localhost:9966/petclinic/api/vets/999,GET,404,PASS
+TC-004,http://localhost:9966/petclinic/api/vets,POST,405,PASS

@@ -1,0 +1,19 @@
+== Pre-gate: Verificación de integridad (SHA) ==
+Baseline: ci/gate_integrity_baseline.txt
+
+❌ Hash distinto: scripts/capturarContratoApi.sh
+   esperado: 231a8d7fa12fd9c6313cf89fd89e8e08fa6ce4ba238be724bc9eba97100c51d7
+   actual:   2fddf1d9c81f5388d63884150adaa2d032c1948e24f87085f169fdb8d7f8e53d
+❌ Hash distinto: scripts/capturarVet.sh
+   esperado: d8fa5e3a9a4549aef152e6cfde56b314f9e227f7a4eff5130d2446cb0d39ea5d
+   actual:   cf352abacc2621faba3482c40fe4a810d6ffe2c6c444da5aca126a572a656172
+❌ Hash distinto: scripts/casos_sistematicos.sh
+   esperado: 8d3a3763915f1988ab3511b12c0ddab985709184bd5b81efaaf60e43199d0193
+   actual:   3938d19125db9c676ea59d3c2d53c83ba5373f39d74775823adbc377083e384a
+✅ OK: scripts/revisarLatencia.sh
+❌ Hash distinto: scripts/validarInputs.sh
+   esperado: d99af6c55f9fd74350fe166fbeae040f976da32778468769e991f791814dd7d5
+   actual:   d9f8cc06b7df17bf6a88db0fc51d215f459d9cb2a567d535c9c6bfb9da0c6e8c
+
+➡️  El gate detectó cambios en artefactos protegidos.
+   Si el cambio es intencional, actualiza el baseline y registra el cambio en ci/gate_change_log.md.

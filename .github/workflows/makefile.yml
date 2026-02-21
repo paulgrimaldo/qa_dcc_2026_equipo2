@@ -1,4 +1,4 @@
-name: CI - Quality Gate
+name: CI Quality Gate
 
 on:
   push:
@@ -7,15 +7,20 @@ on:
     branches: ["**"]
 
 jobs:
-  puerta-de-calidad:
+  quality-gate-execution:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-      - name: Clonar repositorio
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Mostrar versiones de herramientas
+      - name: Verify gate integrity
+        run: |
+          set -e
+          make integrity-check
+
+      - name: Show tool versions
         run: |
           set -e
           uname -a
@@ -23,7 +28,7 @@ jobs:
           docker --version
           curl --version
 
-      - name: Ejecutar Quality Gate vía Make
+      - name: Execute Quality Gate
         env:
           SUT_BASE_URL: http://localhost:9966
           EVIDENCE_DIR: evidence/week5
@@ -32,16 +37,35 @@ jobs:
           make setup
           make quality-gate
 
-      - name: Subir evidencia como artifact
+      - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: evidencia-semana5
+          name: week5-evidence
           path: evidence/week5/
           if-no-files-found: warn
 
-      - name: Detener SUT
+      - name: Stop SUT
         if: always()
         run: |
           set +e
           make stop-sut >/dev/null 2>&1 || true
+
+  verify-evidence-files:
+    needs: quality-gate-execution
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download evidence artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: week5-evidence
+          path: evidence/week5/
+
+      - name: Verify content and anti-Goodhart
+        run: |
+          set -e
+          make content-check
