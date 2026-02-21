@@ -192,7 +192,7 @@
      del CI (Fase 4) son metodológicamente sólidos y diferenciales. 
      (Fortalezas F2/F3) **La cláusula de reejecución de pipelines** para evitar bloqueos 
      representa un riesgo inaceptable para la integridad del gate 
-     y debe modificarse estructuralmente. (D1)
+     y debe modificarse estructuralmente (D1) ademas de no contar con mecanismos que no permitan hacer bypass al gate (Vacío 7).
   2. Ambigüedad sobre el alcance de la propuesta y la cuantificación de los elementos, esto impide comprometer el presupuesto sin garantías de comprensión total de la propuesta. (Vacíos 5 y 6)
   3. La ambigüedad sobre herramientas, responsabilidades del entorno 
      y proceso de causa raíz impide comprometer el presupuesto 
