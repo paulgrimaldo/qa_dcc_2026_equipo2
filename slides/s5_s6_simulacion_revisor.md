@@ -184,13 +184,12 @@
 
 - Decisión: **Rechazar**
 - Justificación:
-  1. El diseño formal de pruebas (Fase 3) y la maduración controlada 
+  1. Aunque el diseño formal de pruebas (Fase 3) y la maduración controlada 
      del CI (Fase 4) son metodológicamente sólidos y diferenciales. 
-     (Fortalezas F2/F3)
-  2. La cláusula de reejecución de pipelines para evitar bloqueos 
+     (Fortalezas F2/F3) **La cláusula de reejecución de pipelines** para evitar bloqueos 
      representa un riesgo inaceptable para la integridad del gate 
      y debe modificarse estructuralmente. (D1)
-  3. Ambigüedad sobre el alcance de la propuesta y la cuantificación de los elementos, esto impide comprometer el presupuesto sin garantías de comprensión total de la propuesta. (Vacíos 5 y 6)
-  4. La ambigüedad sobre herramientas, responsabilidades del entorno 
+  2. Ambigüedad sobre el alcance de la propuesta y la cuantificación de los elementos, esto impide comprometer el presupuesto sin garantías de comprensión total de la propuesta. (Vacíos 5 y 6)
+  3. La ambigüedad sobre herramientas, responsabilidades del entorno 
      y proceso de causa raíz impide comprometer el presupuesto 
      sin garantías operacionales básicas. (Vacíos 1, 2 y 3)
