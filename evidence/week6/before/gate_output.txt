@@ -17,23 +17,23 @@ Verificando salud de la aplicación...
 📊 Estado de la aplicación: En ejecución
 🌐 Endpoint: http://localhost:9966
 🔍 Estado del contenedor:
-24c3b06a8b03   spring-petclinic-rest   6.50%     620.5MiB / 7.654GiB   7.92%     52kB / 158kB   104MB / 2.88MB   49
+24c3b06a8b03   spring-petclinic-rest   0.19%     621.5MiB / 7.654GiB   7.93%     69.5kB / 226kB   104MB / 3.6MB   49
 Archivo falseado creando ejemplo
 ====================================================
 
 Archivos creados en: evidence/week2
 total 88
--rw-r--r--  1 paulgrimaldo  staff  140 Feb 21 00:03 invalid_ids.csv
--rw-r--r--  1 paulgrimaldo  staff  160 Feb 21 00:03 invalid_pet_-1.json
--rw-r--r--  1 paulgrimaldo  staff  158 Feb 21 00:03 invalid_pet_0.json
--rw-r--r--  1 paulgrimaldo  staff  168 Feb 21 00:03 invalid_pet_999999.json
--rw-r--r--  1 paulgrimaldo  staff  162 Feb 21 00:03 invalid_pet_abc.json
+-rw-r--r--  1 paulgrimaldo  staff   45 Feb 21 00:15 invalid_ids.csv
+-rw-r--r--  1 paulgrimaldo  staff  247 Feb 21 00:15 invalid_pet_-1.json
+-rw-r--r--  1 paulgrimaldo  staff  243 Feb 21 00:15 invalid_pet_0.json
+-rw-r--r--  1 paulgrimaldo  staff  263 Feb 21 00:15 invalid_pet_999999.json
+-rw-r--r--  1 paulgrimaldo  staff  251 Feb 21 00:15 invalid_pet_abc.json
 -rw-r--r--  1 paulgrimaldo  staff  802 Feb  1 22:53 latencia_total.txt
 -rw-r--r--  1 paulgrimaldo  staff  186 Feb  1 22:53 latencia.csv
--rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 00:15 openapi_http_code.txt
--rw-r--r--  1 paulgrimaldo  staff  252 Feb 21 00:15 openapi.json
--rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 00:03 vets_http_code.txt
--rw-r--r--  1 paulgrimaldo  staff  324 Feb 21 00:03 vets.json
+-rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 01:05 openapi_http_code.txt
+-rw-r--r--  1 paulgrimaldo  staff  252 Feb 21 01:05 openapi.json
+-rw-r--r--  1 paulgrimaldo  staff    4 Feb 21 00:15 vets_http_code.txt
+-rw-r--r--  1 paulgrimaldo  staff  533 Feb 21 00:15 vets.json
 Archivo falseado creando ejemplo
 ====================================================
 

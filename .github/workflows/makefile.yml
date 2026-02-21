@@ -15,6 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify gate integrity
+        run: |
+          set -e
+          make integrity-check
+
       - name: Show tool versions
         run: |
           set -e
@@ -49,46 +54,18 @@ jobs:
   verify-evidence-files:
     needs: quality-gate-execution
     runs-on: ubuntu-latest
-
+    
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download evidence artifact
         uses: actions/download-artifact@v4
         with:
           name: week5-evidence
           path: evidence/week5/
 
-      - name: Verify files exist
+      - name: Verify content and anti-Goodhart
         run: |
           set -e
-          FILES_TO_CHECK=(
-            "invalid_pet_abc.json"
-            "invalid_pet_999999.json"
-            "invalid_pet_0.json"
-            "invalid_pet_-1.json"
-            "RUNLOG.md"
-            "SUMMARY.md"
-            "systematic_summary.txt"
-            "systematic_results.csv"
-            "invalid_ids.csv"
-            "vets_http_code.txt"
-            "vets.json"
-            "openapi_http_code.txt"
-            "openapi.json"
-          )
-
-          MISSING=0
-          for file in "${FILES_TO_CHECK[@]}"; do
-            if [ ! -f "evidence/week5/$file" ]; then
-              echo "MISSING: evidence/week5/$file"
-              MISSING=$((MISSING + 1))
-            else
-              echo "OK: evidence/week5/$file"
-            fi
-          done
-
-          if [ $MISSING -gt 0 ]; then
-            echo "Failed: $MISSING file(s) missing."
-            exit 1
-          fi
-
-          echo "All files verified successfully."
+          make content-check

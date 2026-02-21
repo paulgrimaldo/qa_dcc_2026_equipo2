@@ -1,1 +1,1 @@
-{"detail":"No static resource pets/-1 for request '/petclinic/pets/-1'.","instance":"/petclinic/pets/-1","status":500,"title":"NoResourceFoundException","type":"http://localhost:9966/petclinic/pets/-1","timestamp":"2026-02-21T04:15:59.482654760Z"}
+{"detail":"No static resource pets/-1 for request '/petclinic/pets/-1'.","instance":"/petclinic/pets/-1","status":500,"title":"NoResourceFoundException","type":"http://localhost:9966/petclinic/pets/-1","timestamp":"2026-02-21T05:22:55.587615091Z"}

@@ -1,100 +1,19 @@
-Iniciando aplicación PetClinic REST...
-Descargando imagen de PetClinic REST...
-Using default tag: latest
-latest: Pulling from springcommunity/spring-petclinic-rest
-Digest: sha256:6cb43eb7fab775436452e2a8a9ecd013eab97d8a7eecafdf15ae1cb5d83624de
-Status: Image is up to date for springcommunity/spring-petclinic-rest:latest
-docker.io/springcommunity/spring-petclinic-rest:latest
-Iniciando contenedor de Pet Clinic REST...
-docker: Error response from daemon: Conflict. The container name "/spring-petclinic-rest" is already in use by container "24c3b06a8b03f4d0a37b897fb7d0f4fbc5db1ccb03f228dc352349f8011d998d". You have to remove (or rename) that container to be able to reuse that name.
+== Pre-gate: Verificación de integridad (SHA) ==
+Baseline: ci/gate_integrity_baseline.txt
 
-Run 'docker run --help' for more information
-Pet Clinic REST iniciado exitosamente en http://localhost:9966
-Documentación de la API disponible en: http://localhost:9966/petclinic/swagger-ui.html
-Realizando verificación de salud en la aplicación Pet Clinic REST...
-Verificando salud de la aplicación...
-✅ Pet Clinic REST está saludable y respondiendo
-📊 Estado de la aplicación: En ejecución
-🌐 Endpoint: http://localhost:9966
-🔍 Estado del contenedor:
-24c3b06a8b03   spring-petclinic-rest   0.50%     620.8MiB / 7.654GiB   7.92%     52.7kB / 159kB   104MB / 2.89MB   49
-📄 Escenario Q1: Disponibilidad del Contrato OpenAPI
-====================================================
+❌ Hash distinto: scripts/capturarContratoApi.sh
+   esperado: 231a8d7fa12fd9c6313cf89fd89e8e08fa6ce4ba238be724bc9eba97100c51d7
+   actual:   2fddf1d9c81f5388d63884150adaa2d032c1948e24f87085f169fdb8d7f8e53d
+❌ Hash distinto: scripts/capturarVet.sh
+   esperado: d8fa5e3a9a4549aef152e6cfde56b314f9e227f7a4eff5130d2446cb0d39ea5d
+   actual:   cf352abacc2621faba3482c40fe4a810d6ffe2c6c444da5aca126a572a656172
+❌ Hash distinto: scripts/casos_sistematicos.sh
+   esperado: 8d3a3763915f1988ab3511b12c0ddab985709184bd5b81efaaf60e43199d0193
+   actual:   3938d19125db9c676ea59d3c2d53c83ba5373f39d74775823adbc377083e384a
+✅ OK: scripts/revisarLatencia.sh
+❌ Hash distinto: scripts/validarInputs.sh
+   esperado: d99af6c55f9fd74350fe166fbeae040f976da32778468769e991f791814dd7d5
+   actual:   d9f8cc06b7df17bf6a88db0fc51d215f459d9cb2a567d535c9c6bfb9da0c6e8c
 
-Configuración:
-  - URL Base: http://localhost:9966/petclinic
-  - Endpoint: /v3/api-docs
-  - Directorio de salida: evidence/week2
-
-🔄 Capturando especificación OpenAPI...
-   ✅ Especificación OpenAPI capturada
-
-================================
-📊 Resultados de Validación
-================================
-Código HTTP: 200
-Validación oráculo: HTTP 200 + campo 'openapi' encontrado
-
-✅ ÉXITO: El contrato OpenAPI está disponible
-
-📁 Archivos generados:
-   - evidence/week2/openapi.json
-   - evidence/week2/openapi_http_code.txt
-📦 Escenario Q4: Respuesta Bien Formada en Veterinarios y Servicios
-=====================================================
-
-Configuración:
-  - URL Base: http://localhost:9966/petclinic
-  - Endpoint: /api/vets
-  - Directorio de salida: evidence/week2
-
-🔄 Capturando veterinarios y servicios...
-🔎 Validando formato JSON...
-   ✓ Archivo comienza con '[' (JSON válido)
-
-================================
-📊 Resultados de Validación
-================================
-Código HTTP: 200
-Formato JSON: Válido (comienza con '[')
-Validación oráculo: HTTP 200 + JSON bien formado
-
-✅ ÉXITO: Los veterinarios y servicios son accesibles y bien formados
-
-📁 Archivos generados:
-   - evidence/week2/vets.json
-   - evidence/week2/vets_http_code.txt
-🔍 Escenario Q3: Robustez ante IDs Inválidos
-==============================================
-
-Configuración:
-  - URL Base: http://localhost:9966/petclinic
-  - Endpoint: /pets/{id}
-  - Directorio de salida: evidence/week2
-  - IDs inválidos a probar: -1 0 999999 abc
-
-🧪 Probando entradas inválidas...
-
-   ✅ ID '-1': HTTP 500 (Rechazado correctamente)
-   ✅ ID '0': HTTP 500 (Rechazado correctamente)
-   ✅ ID '999999': HTTP 500 (Rechazado correctamente)
-   ✅ ID 'abc': HTTP 500 (Rechazado correctamente)
-
-================================
-🔎 Validación del Oráculo
-=========================
-
-Regla del oráculo: Ninguna entrada inválida debe retornar HTTP 200
-
-✅ ÉXITO: Todas las entradas inválidas fueron rechazadas correctamente
-
-Resumen:
-  - Pruebas totales: 4
-  - Pruebas exitosas: 4
-  - Tasa de éxito: 100%
-
-📁 Archivos generados:
-   - evidence/week2/invalid_ids.csv
-   - evidence/week2/pet_*.json (respuestas individuales)
-[OK] Semana 4: 19 test cases ejecutados. Evidencia en evidence/week4
-✅ Quality gate completado. Evidencia en evidence/week5/
+➡️  El gate detectó cambios en artefactos protegidos.
+   Si el cambio es intencional, actualiza el baseline y registra el cambio en ci/gate_change_log.md.

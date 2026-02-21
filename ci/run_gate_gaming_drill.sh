@@ -93,8 +93,40 @@ cp -f evidence/week2/invalid_ids.csv "${BEFORE_DIR}/invalid_ids.csv" 2>/dev/null
 echo "- Resultado: rc=${BEFORE_RC}. Evidencia en ${BEFORE_DIR}/" >> "${RUNLOG}"
 echo "" >> "${RUNLOG}"
 
-# --- Restaurar los 4 scripts desde ci/backup/ antes de ejecutar AFTER ---
-echo "## Restauración de scripts desde ${BACKUP_DIR}/" >> "${RUNLOG}"
+echo "## AFTER: gate actual (con scripts falseados; verificación de integridad + gate)" >> "${RUNLOG}"
+echo "- Acción: 1) ci/verify_gate_integrity.sh (pre-gate); si OK (✅ Integridad verificada), 2) ci/run_quality_gate.sh; luego restaurar scripts" >> "${RUNLOG}"
+
+set +e
+# 1) Verificación de integridad (pre-gate): con scripts falseados debe detectar "Hash distinto"
+bash ./ci/verify_gate_integrity.sh > "${AFTER_DIR}/gate_output.txt" 2>&1
+VERIFY_RC=$?
+AFTER_RC="${VERIFY_RC}"
+# Decisión por contenido: no ejecutar gate si en la salida aparece "❌ Hash distinto"
+# (el verify podría mostrar "✅ Integridad verificada" al final aun habiendo fallos; nos basamos en el contenido)
+if grep -q "❌ Hash distinto" "${AFTER_DIR}/gate_output.txt" 2>/dev/null; then
+  VERIFY_INTEGRITY_OK=0
+else
+  VERIFY_INTEGRITY_OK=1
+fi
+# 2) Ejecutar el quality gate solo si no hubo "Hash distinto" Y exit code 0
+if [[ "${VERIFY_RC}" -eq 0 && "${VERIFY_INTEGRITY_OK}" -eq 1 ]]; then
+  bash ./ci/run_quality_gate.sh >> "${AFTER_DIR}/gate_output.txt" 2>&1
+  AFTER_RC=$?
+else
+  echo "- run_quality_gate no ejecutado (falló verificación de integridad; error ya en gate_output)" >> "${RUNLOG}"
+fi
+set -e
+
+echo "- Resultado verify_gate_integrity: rc=${VERIFY_RC} (esperado distinto de 0 con scripts falseados)" >> "${RUNLOG}"
+if [[ "${VERIFY_RC}" -eq 0 && "${VERIFY_INTEGRITY_OK}" -eq 1 ]]; then
+  echo "- Resultado run_quality_gate: rc=${AFTER_RC}" >> "${RUNLOG}"
+else
+  echo "- Resultado run_quality_gate: no ejecutado (verify falló o contenido '❌ Hash distinto' en gate_output)" >> "${RUNLOG}"
+fi
+echo "" >> "${RUNLOG}"
+
+# Restaurar los 4 scripts desde ci/backup/ tras la ejecución del gate
+echo "## Restauración de scripts desde ${BACKUP_DIR}/ (tras AFTER)" >> "${RUNLOG}"
 for pair in "${SCRIPT_CHEAT_PAIRS[@]}"; do
   script="${pair%%:*}"
   if [[ -f "${BACKUP_DIR}/${script}" ]]; then
@@ -113,20 +145,9 @@ else
 fi
 echo "" >> "${RUNLOG}"
 
-echo "## AFTER: gate actual (con scripts originales restaurados)" >> "${RUNLOG}"
-echo "- Acción: ejecutar ci/run_quality_gate.sh con scripts restaurados" >> "${RUNLOG}"
-
-set +e
-bash ./ci/run_quality_gate.sh > "${AFTER_DIR}/gate_output.txt" 2>&1
-AFTER_RC=$?
-set -e
-
 # Recoger evidencia (AFTER)
 cp -f evidence/week5/SUMMARY.md "${AFTER_DIR}/SUMMARY.md" 2>/dev/null || true
 cp -f evidence/week5/RUNLOG.md "${AFTER_DIR}/RUNLOG.md" 2>/dev/null || true
-
-echo "- Resultado: rc=${AFTER_RC}" >> "${RUNLOG}"
-echo "" >> "${RUNLOG}"
 
 {
   echo "Semana 6 — Resultado del Gaming Drill"
@@ -135,8 +156,10 @@ echo "" >> "${RUNLOG}"
   echo "- Esperado: el gate puede completar y la evidencia en evidence/week5 existe"
   echo "  aunque los scripts no hayan ejercitado el SUT (evidencia falseada)."
   echo ""
-  echo "AFTER (gate actual, con scripts originales restaurados): rc=${AFTER_RC}"
-  echo "- Ejecutado tras restaurar los 4 scripts desde ci/backup/; evidencia real del SUT."
+  echo "AFTER (gate actual, con scripts falseados): verify_rc=${VERIFY_RC}, gate_rc=${AFTER_RC}"
+  echo "- Primero ci/verify_gate_integrity.sh (registra 'Hash distinto' si los scripts están falseados)."
+  echo "- run_quality_gate solo se ejecuta si verify OK (✅ Integridad verificada); si no, el error queda en gate_output y no se corre el gate."
+  echo "- Tras AFTER, scripts restaurados desde ci/backup/."
   echo ""
   echo "Evidencia:"
   echo "- ${BEFORE_DIR}/gate_output.txt"

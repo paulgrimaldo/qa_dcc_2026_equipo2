@@ -1,6 +1,6 @@
 # Makefile para el Proyecto QA Doctorado
 
-.PHONY: help setup start-petclinic-rest stop-petclinic-rest healthcheck smoke Q1-CapturarContratoApi Q2-Latencia Q3-ValidarInputs Q4-Vets QA-week2 clean
+.PHONY: help setup start-petclinic-rest stop-petclinic-rest healthcheck smoke Q1-CapturarContratoApi Q2-Latencia Q3-ValidarInputs Q4-Vets QA-week2 clean integrity-check content-check gate-verify
 
 # Objetivo por defecto
 help:
@@ -21,6 +21,10 @@ help:
 	@echo ""
 	@echo "Pruebas Legacy:"
 	@echo "  smoke          - Ejecutar pruebas de humo"
+	@echo ""
+	@echo "Pipeline / Gate:"
+	@echo "  integrity-check - Verificar integridad SHA de artefactos del gate (pre-gate)"
+	@echo "  content-check   - Verificar contenido de evidencia (post-gate)"
 	@echo ""
 	@echo "Utilidades:"
 	@echo "  clean          - Limpiar archivos temporales"
@@ -65,6 +69,15 @@ systematic-cases: healthcheck
 
 quality-gate:
 	./ci/run_quality_gate.sh
+
+gaming-drill:
+	./ci/run_gate_gaming_drill.sh
+
+integrity-check:
+	./ci/verify_gate_integrity.sh
+
+content-check:
+	./ci/post_gate_verify_content.sh
 
 clean:
 	rm -rf tmp/

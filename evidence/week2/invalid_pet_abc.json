@@ -1,1 +1,1 @@
-{"detail":"No static resource pets/abc for request '/petclinic/pets/abc'.","instance":"/petclinic/pets/abc","status":500,"title":"NoResourceFoundException","type":"http://localhost:9966/petclinic/pets/abc","timestamp":"2026-02-21T04:15:59.733510093Z"}
+{"detail":"No static resource pets/abc for request '/petclinic/pets/abc'.","instance":"/petclinic/pets/abc","status":500,"title":"NoResourceFoundException","type":"http://localhost:9966/petclinic/pets/abc","timestamp":"2026-02-21T05:22:55.647473674Z"}
