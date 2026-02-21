@@ -1,7 +1,7 @@
 # Evaluación de Propuesta - Equipos 2 y 5
 
 **Propuesta evaluada:** B — Empresa: AtlasQA Partners
-**Veredicto:** Aceptar con condiciones
+**Veredicto:** Rechazar
 
 ---
 
