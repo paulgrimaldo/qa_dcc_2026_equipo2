@@ -121,6 +121,10 @@
   **Qué falta:** Declaración explicita del alcance, cuantos elementos del sistema, solo apis, solo flujos críticos.
   **Por qué importa:** Permite entender a detalle la propuesta y mejor evaluación para su implementación y limitantes.
 
+- Vacío 7: Verificación de integridad 
+  **Qué falta:** No se encuentra declarado.
+  **Por qué importa:** Brinda robustez al gate para no sufrir bypass.
+
 ### C) Preguntas de aclaración
 - P1: ¿Qué stack de herramientas proponen para automatización e integración continua?
 - P2: ¿Cómo garantizan que los fallos esporádicos ignorados en primera 
