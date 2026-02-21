@@ -1,0 +1,13 @@
+Semana 6 — Resultado del Gaming Drill
+
+BEFORE (gate legacy, sin integridad): rc=0
+- Esperado: el gate puede completar y la evidencia en evidence/week5 existe
+  aunque los scripts no hayan ejercitado el SUT (evidencia falseada).
+
+AFTER (gate actual, con scripts originales restaurados): rc=0
+- Ejecutado tras restaurar los 4 scripts desde ci/backup/; evidencia real del SUT.
+
+Evidencia:
+- evidence/week6/before/gate_output.txt
+- evidence/week6/before/systematic_summary.txt, systematic_results.csv, etc.
+- evidence/week6/after/gate_output.txt

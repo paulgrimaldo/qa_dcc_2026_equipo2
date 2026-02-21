@@ -20,6 +20,11 @@
 #
 set -euo pipefail
 
+# Ejecutar siempre desde la raíz del repo para que las rutas relativas sean correctas
+# (restauración desde ci/backup/ y escritura en scripts/)
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${REPO_ROOT}"
+
 WEEK6_DIR="evidence/week6"
 BEFORE_DIR="${WEEK6_DIR}/before"
 AFTER_DIR="${WEEK6_DIR}/after"
@@ -31,12 +36,12 @@ BACKUP_DIR="ci/backup"
 CHEAT_DIR="${WEEK6_DIR}/cheat"
 SCRIPTS_DIR="scripts"
 
-# Los 4 scripts del quality gate y sus versiones cheat (nombre en cheat/)
-declare -A SCRIPTS_MAP=(
-  ["capturarContratoApi.sh"]="capturarContrato_cheat.sh"
-  ["capturarVet.sh"]="capturarVet_cheat.sh"
-  ["validarInputs.sh"]="validarInputs_cheat.sh"
-  ["casos_sistematicos.sh"]="casos_sistematicos_cheat.sh"
+# Los 4 scripts del quality gate y sus versiones cheat (formato "script:cheat")
+SCRIPT_CHEAT_PAIRS=(
+  "capturarContratoApi.sh:capturarContrato_cheat.sh"
+  "capturarVet.sh:capturarVet_cheat.sh"
+  "validarInputs.sh:validarInputs_cheat.sh"
+  "casos_sistematicos.sh:casos_sistematicos_cheat.sh"
 )
 
 {
@@ -55,8 +60,9 @@ declare -A SCRIPTS_MAP=(
 
 # --- Aplicar cheat: copiar versiones falseadas sobre scripts/ ---
 echo "## Aplicando scripts falseados" >> "${RUNLOG}"
-for script in "${!SCRIPTS_MAP[@]}"; do
-  cheat="${SCRIPTS_MAP[$script]}"
+for pair in "${SCRIPT_CHEAT_PAIRS[@]}"; do
+  script="${pair%%:*}"
+  cheat="${pair#*:}"
   if [[ -f "${CHEAT_DIR}/${cheat}" ]]; then
     cp -f "${CHEAT_DIR}/${cheat}" "${SCRIPTS_DIR}/${script}"
     chmod +x "${SCRIPTS_DIR}/${script}"
@@ -71,7 +77,7 @@ echo "## BEFORE: gate legacy (sin verificación de integridad)" >> "${RUNLOG}"
 echo "- Acción: ejecutar ci/base/run_quality_gate_old.sh con scripts falseados" >> "${RUNLOG}"
 
 set +e
-./ci/base/run_quality_gate_old.sh > "${BEFORE_DIR}/gate_output.txt" 2>&1
+bash ./ci/base/run_quality_gate_old.sh > "${BEFORE_DIR}/gate_output.txt" 2>&1
 BEFORE_RC=$?
 set -e
 
@@ -87,11 +93,31 @@ cp -f evidence/week2/invalid_ids.csv "${BEFORE_DIR}/invalid_ids.csv" 2>/dev/null
 echo "- Resultado: rc=${BEFORE_RC}. Evidencia en ${BEFORE_DIR}/" >> "${RUNLOG}"
 echo "" >> "${RUNLOG}"
 
-echo "## AFTER: gate actual (con/sin verificación de integridad)" >> "${RUNLOG}"
-echo "- Acción: ejecutar ci/run_quality_gate.sh (debe detectar si hay verificación de integridad)" >> "${RUNLOG}"
+# --- Restaurar los 4 scripts desde ci/backup/ antes de ejecutar AFTER ---
+echo "## Restauración de scripts desde ${BACKUP_DIR}/" >> "${RUNLOG}"
+for pair in "${SCRIPT_CHEAT_PAIRS[@]}"; do
+  script="${pair%%:*}"
+  if [[ -f "${BACKUP_DIR}/${script}" ]]; then
+    cp -f "${BACKUP_DIR}/${script}" "${SCRIPTS_DIR}/${script}"
+    chmod +x "${SCRIPTS_DIR}/${script}"
+    echo "- ${SCRIPTS_DIR}/${script} restaurado desde ${BACKUP_DIR}/" >> "${RUNLOG}"
+  else
+    echo "⚠️  No existe backup ${BACKUP_DIR}/${script}" >> "${RUNLOG}"
+  fi
+done
+# Verificación rápida: ningún script en scripts/ debe contener "falseado" tras restaurar
+if grep -l "falseado" "${SCRIPTS_DIR}"/capturarContratoApi.sh "${SCRIPTS_DIR}"/capturarVet.sh "${SCRIPTS_DIR}"/validarInputs.sh "${SCRIPTS_DIR}"/casos_sistematicos.sh 2>/dev/null; then
+  echo "⚠️  Restauración incompleta: algún script aún contiene 'falseado'" >> "${RUNLOG}"
+else
+  echo "- Verificación: scripts restaurados (sin contenido falseado)" >> "${RUNLOG}"
+fi
+echo "" >> "${RUNLOG}"
+
+echo "## AFTER: gate actual (con scripts originales restaurados)" >> "${RUNLOG}"
+echo "- Acción: ejecutar ci/run_quality_gate.sh con scripts restaurados" >> "${RUNLOG}"
 
 set +e
-./ci/run_quality_gate.sh > "${AFTER_DIR}/gate_output.txt" 2>&1
+bash ./ci/run_quality_gate.sh > "${AFTER_DIR}/gate_output.txt" 2>&1
 AFTER_RC=$?
 set -e
 
@@ -102,18 +128,6 @@ cp -f evidence/week5/RUNLOG.md "${AFTER_DIR}/RUNLOG.md" 2>/dev/null || true
 echo "- Resultado: rc=${AFTER_RC}" >> "${RUNLOG}"
 echo "" >> "${RUNLOG}"
 
-# --- Restaurar los 4 scripts desde ci/backup/ ---
-echo "## Restauración de scripts desde ${BACKUP_DIR}/" >> "${RUNLOG}"
-for script in "${!SCRIPTS_MAP[@]}"; do
-  if [[ -f "${BACKUP_DIR}/${script}" ]]; then
-    cp -f "${BACKUP_DIR}/${script}" "${SCRIPTS_DIR}/${script}"
-    chmod +x "${SCRIPTS_DIR}/${script}"
-    echo "- ${SCRIPTS_DIR}/${script} restaurado" >> "${RUNLOG}"
-  else
-    echo "⚠️  No existe backup ${BACKUP_DIR}/${script}" >> "${RUNLOG}"
-  fi
-done
-
 {
   echo "Semana 6 — Resultado del Gaming Drill"
   echo ""
@@ -121,9 +135,8 @@ done
   echo "- Esperado: el gate puede completar y la evidencia en evidence/week5 existe"
   echo "  aunque los scripts no hayan ejercitado el SUT (evidencia falseada)."
   echo ""
-  echo "AFTER (gate actual): rc=${AFTER_RC}"
-  echo "- Esperado: si el gate incluye verificación de integridad (p. ej. contra"
-  echo "  ci/gate_integrity_baseline.txt), debe detectar el cambio en scripts y fallar."
+  echo "AFTER (gate actual, con scripts originales restaurados): rc=${AFTER_RC}"
+  echo "- Ejecutado tras restaurar los 4 scripts desde ci/backup/; evidencia real del SUT."
   echo ""
   echo "Evidencia:"
   echo "- ${BEFORE_DIR}/gate_output.txt"

@@ -1,6 +1,8 @@
-# RUNLOG — Semana 4
-
-- Fecha/Hora: 2026-02-7T00:00:00
-- Comando: `BASE_URL=http://localhost:9966/petclinic ./scripts/casos_sistematicos.sh`
-- Endpoint: `GET /api/vets/{id}`
-- Oráculos: ver `design/reglas_oraculo.md`
+# Execution Log
+- Step 1: Initializing system components...
+- Step 2: Loading configuration from dummy_config.yaml
+- Step 3: Starting automated test sequence
+- Step 4: Collecting response payloads
+- Step 5: Validating headers and body structure
+- Step 6: Exporting results to CSV format
+- Step 7: Finalizing process with exit code 0

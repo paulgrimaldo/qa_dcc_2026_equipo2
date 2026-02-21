@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "firstName": "James",
+    "lastName": "Carter",
+    "specialties": []
+  },
+  {
+    "id": 2,
+    "firstName": "Helen",
+    "lastName": "Leary",
+    "specialties": ["radiology"]
+  },
+  {
+    "id": 3,
+    "firstName": "Linda",
+    "lastName": "Douglas",
+    "specialties": ["dentistry", "surgery"]
+  }
+]
